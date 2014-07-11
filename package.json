@@ -1,0 +1,22 @@
+{
+  "name": "rickshaw_ride_management",
+  "description": "Application to access the Formstack API and manage user-requested rides.",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Dana Hartweg <dana.hartweg@gmail.com>",
+  "scripts": {
+    "postinstall": "node_modules/.bin/bower install"
+  },
+  "devDependencies": {
+    "bower": "1.3.x",
+    "broccoli": "0.12.x",
+    "broccoli-static-compiler": "0.1.x",
+    "broccoli-uglify-js": "0.1.x",
+    "broccoli-es6-concatenator": "0.1.x",
+    "broccoli-sass": "0.1.x",
+    "broccoli-template": "0.1.x",
+    "broccoli-merge-trees": "0.1.x",
+    "broccoli-bower": "0.2.x",
+    "broccoli-vendor": "0.1.x"
+  }
+}

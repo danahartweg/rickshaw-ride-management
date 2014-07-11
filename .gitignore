@@ -1,3 +1,6 @@
 # ignore local environment variables
-
 env.php
+
+# ignore temp build files
+node_modules/
+bower_components/
