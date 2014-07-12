@@ -1,0 +1,11 @@
+# rewrite any sensitive files, or files that shouldn't be accessed in production
+RewriteRule ^.git/        - [F]
+RewriteRule ^app/         - [F]
+RewriteRule ^config/      - [F]
+RewriteRule ^includes/    - [F]
+RewriteRule ^styles/      - [F]
+RewriteRule ^vendor/      - [F]
+RewriteRule ^.gitignore   - [F]
+RewriteRule ^bower.json   - [F]
+RewriteRule ^Brocfile.js  - [F]
+RewriteRule ^package.json - [F]

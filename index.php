@@ -43,8 +43,8 @@ if (isset($_COOKIE[$tokenName])) {
   // default expiration from formstack looks to be infinite, so 12 hours will be default
   setcookie($tokenName, $response->access_token, time() + 43200, '/');
 
-  // start the application
-  launchApplication();
+  // redirect to the main page to clear the query string
+  header("Location: /");
 
 } else {
 
@@ -61,6 +61,6 @@ if (isset($_COOKIE[$tokenName])) {
 };
 
 function launchApplication() {
-  // load the application html page with the auth token
-  echo 'loading application';
+  // load the application html page
+  require ('includes/app.php');
 };
