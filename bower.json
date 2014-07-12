@@ -3,6 +3,7 @@
   "dependencies": {
     "handlebars": "1.1.x",
     "jquery": "2.1.x",
+    "jquery.cookie": "1.4.x",
     "ember": "1.5.x",
     "ember-data": "1.0.0-beta.8",
     "ember-resolver": "master"

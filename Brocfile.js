@@ -59,7 +59,8 @@ var appJs = compileES6(appAndDependencies, {
     'handlebars.js',
     'ember.js',
     'ember-data.js',
-    'ember-resolver.js'
+    'ember-resolver.js',
+    'jquery.cookie.js'
   ],
   wrapInEval: env !== 'production',
   outputFile: '/app.js'

@@ -4,3 +4,4 @@ env.php
 # ignore temp build files
 node_modules/
 bower_components/
+tmp/
