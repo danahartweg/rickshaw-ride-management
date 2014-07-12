@@ -8,6 +8,8 @@ export default ApplicationAdapter.extend({
   // always grab the associated submissions when loading the form
   find: function(store, type, id) {
     var baseURL = this.buildURL(type.typeKey, id);
+
+    console.log('finding form');
     
     return new Ember.RSVP.hash({
       form: this.ajax(baseURL, 'GET'),
