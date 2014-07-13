@@ -62,7 +62,7 @@ export default Ember.View.extend({
           map.setZoom(14);
           map.panTo(this.getPosition());
 
-          self.controller.send('displayRequest');
+          self.controller.send('displayRequest', submission);
         });
       }
     }
