@@ -51,9 +51,15 @@ export default Ember.View.extend({
         var position = new google.maps.LatLng(submission.get('latitude'), submission.get('longitude'));
 
         // To add the marker to the map, use the 'map' property
-        var marker = new google.maps.Marker({
+        submission.set('marker', new google.maps.Marker({
             position: position,
             map: map
+        }));
+
+        // add marker click event
+        google.maps.event.addListener(submission.get('marker'), 'click', function() {
+          map.setZoom(14);
+          map.panTo(this.getPosition());
         });
       }
     }
