@@ -5,8 +5,6 @@ export default DS.RESTSerializer.extend({
     // if loading a specific form, sideload the data
     if ( payload.form ) {
 
-      // var form_id = payload.form.id;
-
       var fields = payload.form.fields;
       delete payload.form.fields;
 
@@ -19,13 +17,11 @@ export default DS.RESTSerializer.extend({
       // extract all field ids into new child id array
       for (var i = 0, size = fields.length; i < size; i++) {
         field_ids[i] = fields[i].id;
-        // fields[i].form = form_id;
       };
 
       // extract all submission ids into new child id array
       for (var i = 0, size = submissions.length; i < size; i++) {
         submission_ids[i] = submissions[i].id;
-        // submissions[i].form = form_id;
       };
 
       // assign sideloaded ids
