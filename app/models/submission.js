@@ -25,5 +25,5 @@ export default DS.Model.extend({
         console.log('there was an error: ' + error);
       }
     });
-  }
+  }.on('didLoad')
 });

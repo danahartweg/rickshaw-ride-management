@@ -4,13 +4,10 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    displayRequest: function(submission) {
-      submission.findSubmissionData();
+    displayRequest: function(submission_id) {
 
       var rideDetailController = this.controllerFor('rideDetail');
-      rideDetailController.set('model', submission);
-
-      console.log(submission);
+      rideDetailController.set('model', this.store.find('submission', submission_id));
 
       this.render('rideDetail', {
         into: 'application',

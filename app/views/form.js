@@ -57,12 +57,14 @@ export default Ember.View.extend({
             map: map
         }));
 
+        submission.get('marker').submission_id = submission.id;
+
         // add marker click event
         google.maps.event.addListener(submission.get('marker'), 'click', function() {
           map.setZoom(14);
           map.panTo(this.getPosition());
 
-          self.controller.send('displayRequest', submission);
+          self.controller.send('displayRequest', this.submission_id);
         });
       }
     }
