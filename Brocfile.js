@@ -67,6 +67,7 @@ var appJs = compileES6(appAndDependencies, {
 });
 
 var appCss = compileSass(sourceTrees, 'appkit/main.scss', '/app.min.css', { outputStyle: 'compressed' });
+var normalizeCss = compileSass(sourceTrees, 'appkit/core/normalize.scss', '/normalize.min.css', { outputStyle: 'compressed' });
 
 if (env === 'production') {
   appJs = uglifyJavaScript(appJs, {
@@ -75,4 +76,4 @@ if (env === 'production') {
   });
 };
 
-module.exports = mergeTrees([appJs, appCss]);
+module.exports = mergeTrees([appJs, appCss, normalizeCss]);

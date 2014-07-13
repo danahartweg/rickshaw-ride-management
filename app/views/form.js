@@ -9,7 +9,7 @@ export default Ember.View.extend({
     // for now, default to raleigh coords
     var mapOptions = {
       center: new google.maps.LatLng(35.779059, -78.638714),
-      zoom: 11
+      zoom: 12
     };
 
     this.set('map', new google.maps.Map(this.$('#map-canvas')[0], mapOptions));
@@ -21,7 +21,7 @@ export default Ember.View.extend({
                                           pos.coords.longitude);
 
         // center the map to the current location
-        self.get('map').setCenter(position);
+        self.get('map').panTo(position);
 
         // add current location marker to the map
         var marker = new google.maps.Marker({
@@ -39,6 +39,7 @@ export default Ember.View.extend({
   }.on('didInsertElement'),
 
   addMarkers: function() {
+    var self = this;
     var submissions = this.get('submissions');
 
     if (submissions != null) {
@@ -60,6 +61,8 @@ export default Ember.View.extend({
         google.maps.event.addListener(submission.get('marker'), 'click', function() {
           map.setZoom(14);
           map.panTo(this.getPosition());
+
+          self.controller.send('displayRequest');
         });
       }
     }
