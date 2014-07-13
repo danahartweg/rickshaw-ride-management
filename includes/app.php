@@ -18,6 +18,13 @@
     };
   </script>
 
+  <?php
+
+  $key = getenv('GOOGLE_MAPS_BROWSER_KEY');
+  echo "<script src='https://maps.googleapis.com/maps/api/js?key=${key}'></script>"
+
+  ?>
+
   <script src="dist/app.js"></script>
 
   <script type="text/javascript">

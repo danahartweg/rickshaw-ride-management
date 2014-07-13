@@ -4,5 +4,5 @@ export default DS.Model.extend({
   latitude: DS.attr('number'),
   longitude: DS.attr('number'),
 
-  form: DS.belongsTo('form', { async: 'false' })
+  form: DS.belongsTo('form', { async: 'false', embedded: 'always' })
 });
