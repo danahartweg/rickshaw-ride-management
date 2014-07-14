@@ -1,13 +1,16 @@
-<div id="modal" class="reveal-modal small" data-reveal>
-  <ul>
-    <li>{{ model.id }}</li>
-    <li>{{ controller.phone.value }}</li>
-    <li>{{ controller.email.value }}</li>
-    <li>{{ controller.message.value }}</li>
-  </ul>
-  <ul>
-    {{#each model.submissionData}}
-      <li>{{ field.id }} | {{ field.name }} | {{ value }}</li>
-    {{/each}}
-  </ul>
+<div id="modal" class="reveal-modal small ride-details" data-reveal>
+  <div class="row">
+    <div class="medium-6 columns">{{ model.phone.value }}</div>
+    <div class="medium-6 columns">{{ model.email.value }}</div>
+  </div>
+
+  <div class="row">
+    <div class="medium-12 columns">{{ model.message.value }}</div>
+  </div>
+
+  <div class="row">
+    <div class="medium-12 columns">
+      <button class="button expand" type="submit">Pick them up!</button>
+    </div>
+  </div>
 </div>

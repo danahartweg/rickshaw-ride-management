@@ -8,6 +8,30 @@ export default DS.Model.extend({
 
   submissionData: null,
 
+  phone: function() {
+    return this.findProperData('phone');
+  }.property(),
+
+  email: function() {
+    return this.findProperData('email');
+  }.property(),
+
+  message: function() {
+    return this.findProperData('special_considerations');
+  }.property(),
+
+  findProperData: function(type) {
+    var submissionData = this.get('submissionData');
+
+    for (var i = 0, size = submissionData.length; i < size; i++) {
+      var item = submissionData[i];
+
+      if (item.get('field.name') === type) {
+        return item;
+      };
+    }
+  },
+
   createEmptyArray: function() {
     this.submissionData = [];
   }.on('init'),
@@ -32,8 +56,6 @@ export default DS.Model.extend({
 
           self.get('submissionData').addObject(newData);
         });
-
-        // self.assignAdditionalProperties();
       },
       error: function(error) {
         console.log('there was an error: ' + error);

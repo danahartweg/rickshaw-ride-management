@@ -36,3 +36,16 @@
     max-width: none;
   }
 }
+
+
+// RIDE DETAIL MODAL
+// -----------------
+
+.ride-details {
+  .columns {
+    height: $baseSize;
+
+    padding: 0;
+    margin: 10px 0;
+  }
+}
