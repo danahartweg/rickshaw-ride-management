@@ -1,6 +1,6 @@
 export default Ember.View.extend({
   map: null,
-  submissions: Ember.computed.oneWay('controller.allSubmissions.content.content'),
+  submissions: Ember.computed.oneWay('controller.allSubmissions'),
 
   domSetup: function() {
 
@@ -39,11 +39,12 @@ export default Ember.View.extend({
   }.on('didInsertElement'),
 
   addMarkers: function() {
-    var self = this;
     var submissions = this.get('submissions');
 
-    if (submissions != null) {
+    if (submissions !== undefined && submissions !== null) {
+      var self = this;
 
+      var submissions = this.get('submissions');
       var map = this.get('map');
 
       for (var i = 0, numMarkers = submissions.length; i < numMarkers; i++) {
