@@ -20,6 +20,14 @@ export default DS.Model.extend({
     return this.findProperData('special_considerations');
   }.property(),
 
+  assigned: function() {
+    return this.findProperData('assigned');
+  }.property(),
+
+  status: function() {
+    return this.findProperData('status');
+  }.property(),
+
   findProperData: function(type) {
     var submissionData = this.get('submissionData');
 
@@ -37,11 +45,11 @@ export default DS.Model.extend({
   }.on('init'),
 
   findSubmissionData: function() {
-    var adapter = this.store.adapterFor('submission');
-    var store = this.store;
     var self = this;
+    var adapter = self.store.adapterFor('submission');
+    var store = self.store;
 
-    var requestURL = adapter.host + '/' + adapter.namespace + '/submission/' + this.get('id');
+    var requestURL = adapter.host + '/' + adapter.namespace + '/submission/' + self.get('id');
 
     return $.ajax({
       url: requestURL,
