@@ -1,3 +1,5 @@
+// import SubmissionData from 'appkit/models/submission-data';
+
 export default DS.Model.extend({
   timestamp: DS.attr('string'),
 
@@ -6,10 +8,15 @@ export default DS.Model.extend({
 
   form: DS.belongsTo('form', { async: 'false', embedded: 'always' }),
 
-  submissionData: [],
+  submissionData: null,
+
+  createEmptyArray: function() {
+    this.submissionData = [];
+  }.on('init'),
 
   findSubmissionData: function() {
     var adapter = this.store.adapterFor('submission');
+    var store = this.store;
     var self = this;
 
     var requestURL = adapter.host + '/' + adapter.namespace + '/submission/' + this.get('id');
@@ -19,7 +26,14 @@ export default DS.Model.extend({
       type: 'GET',
       headers: adapter.headers,
       success: function(response) {
-        self.set('submissionData', response.data);
+        response.data.forEach(function(data){
+          var newData = store.createRecord('submissionData', {
+            value: data.value,
+            field: store.find('field', data.field)
+          });
+
+          self.get('submissionData').addObject(newData);
+        });
       },
       error: function(error) {
         console.log('there was an error: ' + error);
