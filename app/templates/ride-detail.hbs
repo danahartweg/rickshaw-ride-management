@@ -1,7 +1,13 @@
 <div id="modal" class="reveal-modal small" data-reveal>
   <ul>
+    <li>{{ model.id }}</li>
+    <li>{{ controller.phone.value }}</li>
+    <li>{{ controller.email.value }}</li>
+    <li>{{ controller.message.value }}</li>
+  </ul>
+  <ul>
     {{#each model.submissionData}}
-      <li>{{ field.name }} | {{ value }}</li>
+      <li>{{ field.id }} | {{ field.name }} | {{ value }}</li>
     {{/each}}
   </ul>
 </div>

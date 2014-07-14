@@ -1,5 +1,3 @@
-// import SubmissionData from 'appkit/models/submission-data';
-
 export default DS.Model.extend({
   timestamp: DS.attr('string'),
 
@@ -34,6 +32,8 @@ export default DS.Model.extend({
 
           self.get('submissionData').addObject(newData);
         });
+
+        // self.assignAdditionalProperties();
       },
       error: function(error) {
         console.log('there was an error: ' + error);
