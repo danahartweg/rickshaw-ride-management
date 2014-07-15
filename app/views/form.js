@@ -14,28 +14,6 @@ export default Ember.View.extend({
 
     this.set('map', new google.maps.Map(this.$('#map-canvas')[0], mapOptions));
 
-    // attempt to geolocate client
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(pos) {
-        var position = new google.maps.LatLng(pos.coords.latitude,
-                                          pos.coords.longitude);
-
-        // center the map to the current location
-        self.get('map').panTo(position);
-
-        // add current location marker to the map
-        var marker = new google.maps.Marker({
-          position: position,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 6
-          },
-          draggable: false,
-          map: self.get('map')
-        });
-      });
-    };
-
   }.on('didInsertElement'),
 
   addMarkers: function() {
@@ -69,5 +47,31 @@ export default Ember.View.extend({
         });
       }
     }
-  }.observes('submissions').on('didInsertElement')
+  }.observes('submissions').on('didInsertElement'),
+
+  addUserMaker: function() {
+    var user = this.get('controller.currentUser');
+
+    // add the user marker to the map once it has been located
+    if (user.get('latitude') !== null && user.get('longitude') !== null) {
+
+      var map = this.get('map');
+
+      var position = new google.maps.LatLng(user.get('latitude'), user.get('longitude'));
+
+      // center the map to the user's location
+      map.panTo(position);
+
+      // add location marker to the map
+      var marker = new google.maps.Marker({
+        position: position,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 6
+        },
+        draggable: false,
+        map: map
+      });
+    }
+  }.observes('controller.currentUser.longitude', 'controller.currentUser.latitude').on('didInsertElement')
 })
