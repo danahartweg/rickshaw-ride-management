@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="description" content="Manage and assign ride requests submitted through a Formstack form.">
 
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
   <link rel="stylesheet" href="dist/normalize.min.css">
   <link rel="stylesheet" href="dist/app.min.css">
 
