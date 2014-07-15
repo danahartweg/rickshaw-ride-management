@@ -8,6 +8,10 @@ export default DS.Model.extend({
 
   submissionData: null,
 
+  beenAssigned: function() {
+    return ( this.get('assigned.value') === '' ) ? false : true;
+  }.property('assigned.value'),
+
   phone: function() {
     return this.findProperData('phone');
   }.property(),
@@ -39,6 +43,10 @@ export default DS.Model.extend({
       };
     }
   },
+
+  navigateURL: function() {
+    return 'https://www.google.com/maps/dir/Current+Location/' + this.get('latitude') + ',' + this.get('longitude');
+  }.property('latitude'),
 
   createEmptyArray: function() {
     this.submissionData = [];
