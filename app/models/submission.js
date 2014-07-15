@@ -4,6 +4,8 @@ export default DS.Model.extend({
   latitude: DS.attr('number'),
   longitude: DS.attr('number'),
 
+  marker: null,
+
   form: DS.belongsTo('form', { async: 'false', embedded: 'always' }),
 
   submissionData: null,
@@ -13,8 +15,8 @@ export default DS.Model.extend({
   }.property('message.value'),
 
   isAssigned: function() {
-    return ( this.get('assigned.value.length') > 0 ) ? true : false;
-  }.property('assigned.value'),
+    return ( this.get('status.value') === 'assigned' ) ? true : false;
+  }.property('status.value'),
 
   phone: function() {
     return this.findProperData('phone');
@@ -28,7 +30,7 @@ export default DS.Model.extend({
     return this.findProperData('special_considerations');
   }.property(),
 
-  assigned: function() {
+  assigned_person: function() {
     return this.findProperData('assigned');
   }.property(),
 
@@ -41,8 +43,8 @@ export default DS.Model.extend({
 
     for (var i = 0, size = submissionData.length; i < size; i++) {
       var item = submissionData[i];
-
-      if (item.get('field.name') === type) {
+      
+      if (item.get('field.name') === type.toString()) {
         return item;
       };
     }
@@ -50,16 +52,23 @@ export default DS.Model.extend({
 
   navigateURL: function() {
     return 'https://www.google.com/maps/dir/Current+Location/' + this.get('latitude') + ',' + this.get('longitude');
-  }.property('latitude'),
+  }.property('latitude', 'longitude'),
+
+  // setMarkerIcon: function() {
+  //   // if the marker is assigned, change the icon
+  //   if (this.get('isAssigned') === true) {
+  //     this.get('marker').setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+  //   };
+  // }.observes('marker').on('didCreate'),
 
   createEmptyArray: function() {
-    this.submissionData = [];
+    this.set('submissionData', new Ember.A());
   }.on('init'),
 
   findSubmissionData: function() {
     var self = this;
-    var adapter = self.store.adapterFor('submission');
-    var store = self.store;
+    var adapter = this.store.adapterFor('submission');
+    var store = this.store;
 
     var requestURL = adapter.host + '/' + adapter.namespace + '/submission/' + self.get('id');
 
@@ -68,14 +77,16 @@ export default DS.Model.extend({
       type: 'GET',
       headers: adapter.headers,
       success: function(response) {
-        response.data.forEach(function(data){
+        for (var i = 0, size = response.data.length; i < size; i++) {
+          var data = response.data[i];
+
           var newData = store.createRecord('submissionData', {
             value: data.value,
             field: store.find('field', data.field)
           });
 
           self.get('submissionData').addObject(newData);
-        });
+        };
       },
       error: function(error) {
         console.log('there was an error: ' + error);

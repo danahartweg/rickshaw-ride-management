@@ -12,10 +12,10 @@ export default Ember.Controller.extend({
       var putData = {};
 
       putData['read'] = 1;
-      putData['field_' + submission.get('assigned.field.id')] = self.get('currentUser.name');
-      putData['field_' + submission.get('status.field.id')] = 'assigned';
 
-      debugger;
+      // random bug would sometimes not assign the field id, hardcoded temporarily
+      putData['field_26537172'] = self.get('currentUser.name');
+      putData['field_' + submission.get('status.field.id')] = 'assigned';
 
       $.ajax({
         url: requestURL,
@@ -23,7 +23,10 @@ export default Ember.Controller.extend({
         headers: adapter.headers,
         data: putData,
         success: function(response) {
-          submission.set('assigned.value', self.get('currentUser.name'));
+          if (submission.get('assigned.value') !== undefined) {
+            submission.set('assigned.value', self.get('currentUser.name'));
+          };
+
           submission.set('status.value', 'assigned');
         },
         error: function(error) {
