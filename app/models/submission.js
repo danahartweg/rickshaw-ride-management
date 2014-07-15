@@ -8,8 +8,12 @@ export default DS.Model.extend({
 
   submissionData: null,
 
-  beenAssigned: function() {
-    return ( this.get('assigned.value') === '' ) ? false : true;
+  hasMessage: function() {
+    return ( this.get('message.value.length') > 0 ) ? true : false;
+  }.property('message.value'),
+
+  isAssigned: function() {
+    return ( this.get('assigned.value.length') > 0 ) ? true : false;
   }.property('assigned.value'),
 
   phone: function() {

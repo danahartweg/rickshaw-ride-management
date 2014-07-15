@@ -2,19 +2,25 @@
 
   <div id="modal" class="reveal-modal small ride-details" data-reveal>
     <div class="row">
+      <div class="medium-12 columns"><h3>Ride Request Information</h3></div>
+    </div>
+
+    <div class="row">
       <div class="medium-6 columns">{{ phone.value }}</div>
       <div class="medium-6 columns">{{ email.value }}</div>
     </div>
 
-    <div class="row">
-      <div class="medium-12 columns">{{ message.value }}</div>
-    </div>
+    {{#if hasMessage}}
+      <div class="row">
+        <div class="medium-12 columns">{{ message.value }}</div>
+      </div>
+    {{/if}}
 
-    {{#if beenAssigned}}
+    {{#if isAssigned}}
       <div class="row">
         <div class="medium-12 columns">
           <a {{bind-attr href='navigateURL'}} target="_blank">
-          <button class="expand">Get me directions!</button>
+          <button class="expand navigation">Get me directions!</button>
           </a>
         </div>
       </div>
