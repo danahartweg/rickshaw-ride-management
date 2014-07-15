@@ -38,10 +38,10 @@
 }
 
 
-// RIDE DETAIL MODAL
-// -----------------
+// MODALS
+// ------
 
-.ride-details {
+#modal {
   h3 {
     font-weight: bold;
     text-align: center;
@@ -54,6 +54,25 @@
     margin: 10px 0;
   }
 
+  input {
+    height: $baseSize;
+    line-height: $baseSize;
+
+    width: 100%;
+
+    padding: 0 10px;
+  }
+
+  button {
+    height: 100%;
+  }
+}
+
+
+// RIDE DETAIL MODAL
+// -----------------
+
+.ride-details {
   .navigation {
     background-color: $success-color;
   }

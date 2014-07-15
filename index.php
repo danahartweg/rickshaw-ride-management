@@ -26,8 +26,8 @@ if (isset($_COOKIE[$tokenName])) {
 
   $ch = curl_init(TOKEN_URL);
 
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-  curl_setopt($ch, CURLOPT_POST, 1); 
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+  curl_setopt($ch, CURLOPT_POST, true);
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
     'grant_type' => 'authorization_code',
     'client_id' => getenv('FORMSTACK_CLIENT_ID'),
@@ -38,6 +38,7 @@ if (isset($_COOKIE[$tokenName])) {
   
   // request and decode json
   $response = json_decode(curl_exec($ch));
+  curl_close($ch);
 
   // set token and expiration to cookie
   // default expiration from formstack looks to be infinite, so 12 hours will be default

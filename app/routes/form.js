@@ -12,7 +12,7 @@ export default Ember.Route.extend({
         into: 'application',
         outlet: 'modal',
         controller: rideDetailController,
-        view: 'rideDetail'
+        view: 'modal'
       });
     }
   }

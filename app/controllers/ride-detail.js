@@ -1,4 +1,7 @@
 export default Ember.Controller.extend({
+  needs: 'user',
+  currentUser: Ember.computed.oneWay('controllers.user.model'),
+
   actions: {
     claimSubmission: function(submission) {
       var self = this;
@@ -9,8 +12,10 @@ export default Ember.Controller.extend({
       var putData = {};
 
       putData['read'] = 1;
-      putData['field_' + submission.get('assigned.field.id')] = 'dana.hartweg@gmail.com';
+      putData['field_' + submission.get('assigned.field.id')] = self.get('currentUser.name');
       putData['field_' + submission.get('status.field.id')] = 'assigned';
+
+      debugger;
 
       $.ajax({
         url: requestURL,
@@ -18,7 +23,7 @@ export default Ember.Controller.extend({
         headers: adapter.headers,
         data: putData,
         success: function(response) {
-          submission.set('assigned.value', 'dana.hartweg@gmail.com');
+          submission.set('assigned.value', self.get('currentUser.name'));
           submission.set('status.value', 'assigned');
         },
         error: function(error) {

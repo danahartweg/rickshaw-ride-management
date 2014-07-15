@@ -1,0 +1,20 @@
+{{#with model}}
+
+  <div id="modal" class="reveal-modal small ride-details" data-reveal>
+    <div class="row">
+      <div class="medium-12 columns"><h3>Who are you?</h3></div>
+    </div>
+
+    <div class="row">
+      <div class="medium-12 columns">
+        {{input valueBinding="name" type="text" palceholder="Name"}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="medium-12 columns">
+        <button class="button expand">Let's get going!</button>
+      </div>
+    </div>
+
+{{/with}}
